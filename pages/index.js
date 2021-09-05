@@ -9,10 +9,10 @@ export default function Home() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
   const registerUser = async (data) => {
-    const res = await fetch('/api/register', {
+    const response = await fetch('/api/register', {
         body: JSON.stringify({
-          cname: data['cname'],
-          fname: data['fname'],
+          companyName: data['companyName'],
+          fullName: data['fullName'],
           email: data['email'],
           password: data['password'],
         }),
@@ -21,8 +21,7 @@ export default function Home() {
         },
         method: 'POST'
       })
-    const result = await res.json()
-    console.log(result);
+    const result = await response.json()
   }
 
   return (
@@ -30,33 +29,33 @@ export default function Home() {
           <form onSubmit={handleSubmit(registerUser)}
               className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
-              <label className="" htmlFor="username">
+              <label className="" htmlFor="companyName">
                 Company name
               </label>
               <input 
-                {...register("cname", { required: true })}
+                {...register("companyName", { required: true })}
                 className="border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline" 
-                id="cname" 
-                name="cname" 
+                id="companyName" 
+                name="companyName" 
                 type="text" 
                 placeholder="company name" />
-                {errors.cname && <span>This field is required</span>}
+                {errors.companyName && <span>This field is required</span>}
             </div>
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fullName">
                 Enter your full name
               </label>
               <input 
-                  {...register("fname", { required: true })}
+                  {...register("fullName", { required: true })}
                   className="border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline" 
-                  id="fname"
-                  name='fname'
+                  id="fullName"
+                  name='fullName'
                   type="text" 
                   placeholder="full name"/>
-                  {errors.fname && <span>This field is required</span>}
+                  {errors.fullName && <span>This field is required</span>}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                 Enter your email
               </label>
               <input
@@ -82,17 +81,17 @@ export default function Home() {
                   {errors.password && <span>This field is required</span>}
             </div>
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
                 Confirm Password
               </label>
               <input 
-                  {...register("cpassword", { required: true })}
+                  {...register("confirmPassword", { required: true })}
                   className="border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline" 
-                  id="cpassword" 
-                  name="cpassword"
+                  id="confirmPassword" 
+                  name="confirmPassword"
                   type="password" 
                   placeholder="******************"/>
-                  {errors.cpassword && <span>This field is required</span>}
+                  {errors.confirmPassword && <span>This field is required</span>}
             </div>
             <div className="flex items-center justify-between">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
