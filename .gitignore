@@ -8,7 +8,7 @@
 # next.js
 /.next/
 next.config.js
-.next
+
 # production
 /build
 
