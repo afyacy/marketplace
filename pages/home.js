@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <h1>MarketPlace</h1>
+      <h1>This is Home after login</h1>
     </>
   )
 }
