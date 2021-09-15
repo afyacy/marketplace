@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image'
+import logo from '/public/images/logo.png'
+
 import Head from 'next/head';
 
 export default function Navbar() {
@@ -23,12 +25,12 @@ export default function Navbar() {
 						<div>
 							{/* <!-- Website Logo --> */}
 							<a href="#" className="flex items-center py-4 px-2">
-								<Image src="/images/logo.png" alt="Logo" className="h-8 w-10 mr-2" width="35px" height="30px"/>
+								<Image src={logo} alt="Logo" className="h-8 w-10 mr-2" width="35px" height="30px"/>
 								<span className="font-semibold text-gray-500 text-lg">MarketPlace</span>
 							</a>
 						</div>
 					</div>
-          {/* <!-- Primary Navbar items --> */}
+         				{/* <!-- Primary Navbar items --> */}
 						<div className="hidden md:flex items-center space-x-2">
 							<a href="" className="py-4 px-2 text-green-500 border-b-4 border-teal-light font-semibold ">Home</a>
 							<a href="" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</a>

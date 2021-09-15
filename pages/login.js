@@ -1,39 +1,40 @@
 import { useForm } from "react-hook-form";
-import { useState } from 'react';
 import Image  from "next/image";
-import Link from 'next/link'
 import Head from 'next/head';
+import { providers, signIn, getSession} from "next-auth/client";
+import {useRouter} from "next/router";
+import Navbar from "../components/layout/Navbar";
 
 
 
 export default function Login() {
 
-  // <!-- Toggle for mobile view -->
-  const [showMe, setShowMe] = useState(false);
-  function toggle(){
-    setShowMe(!showMe);
-  }
-
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const router = useRouter();
 
-  // <!-- Connect to API -->
   const loginUser = async (data) => {
-    const response = await fetch('/api/login', {
-        body: JSON.stringify({
-          email: data['email'],
-          password: data['password'],
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST'
-      })
-    const result = await response.json()
-    if (result['message'] == 'User Found') {
-      console.log('User Found')
-    }else {
-      console.log(result['message'])
-    }
+
+      const result = await signIn('credentials', {
+        redirect: false,
+        email: data['email'],
+        password: data['password'],
+    });
+
+    if (result.error !== null)
+      {
+          if (result.status === 401)
+          {
+              resultError = "Your username/password combination was incorrect. Please try again";
+          }
+          else
+          {
+            resultError = result.error;
+          }
+      }
+      else
+      {
+        router.push("/home")
+      }
     
   }
     return (
@@ -42,56 +43,11 @@ export default function Login() {
       <Head>
 			  <title>MarketPlace - Login</title>
 		  </Head>
+      <Navbar />
       <div className="flex h-screen justify-center items-center">
-        <div className="container w-7/12 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-2 shadow-lg">
+        <div className="container w-full lg:w-full w-7/12 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-2 shadow-lg">
           {/* Left Section */}
-          <div>     
-            <nav className="bg-white">
-              <div className="max-w-6xl mx-auto px-4">
-                <div className="flex justify-between">
-                  <div className="flex space-x-7">
-                    <div>
-                      {/* <!-- Website Logo --> */}
-                      <Link href="/" >
-                        <a className="flex items-center py-4 px-2"><Image src="/images/logo.png" alt="Logo" className="h-8 w-10 mr-2" width="35px" height="30px"/>
-                        <span className="font-semibold text-gray-500 text-lg">MarketPlace</span></a>
-                      </Link>
-                    </div>
-                    
-                  </div>
-                  {/* <!-- Secondary Navbar items --> */}
-                  <div className="hidden md:flex items-center space-x-3 ">
-                    <a href="login" className="py-2 px-2 font-medium text-teal-light rounded transition duration-300">Log In</a>
-                    <a href="register" className="py-2 px-2 font-medium bg-green-500 rounded transition duration-300">Sign Up</a>
-                  </div>
-                  {/* <!-- Mobile menu button --> */}
-                  <div className="md:hidden flex items-center">
-                    <button className="outline-none mobile-menu-button" onClick={toggle}>
-                    <svg className=" w-6 h-6 text-gray-500 hover:text-green-500 "
-                      x-show="!showMenu"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                  </button>
-                  </div>
-                </div>
-              </div>
-              {/* <!-- mobile menu --> */}
-              <div className="hidden mobile-menu px-8" style={{
-                display: showMe?"block":"none"
-              }}>
-                <ul>
-                  <li><a href="login" className="block text-sm px-2 py-1 transition duration-300">Log In</a></li>
-                  <li><a href="register" className="block text-sm px-2 py-1 transition duration-300">Sign Up</a></li>
-                </ul>
-              </div>
-            </nav>
+          <div>  
             <h3 className="ml-8 mt-16 text-2xl">Welcome Back!</h3>
             <form className="mt-8" onSubmit={handleSubmit(loginUser)}>
               <div className="sm:rounded-md sm:overflow-hidden">
@@ -113,9 +69,9 @@ export default function Login() {
                       <div className="mt-1 flex rounded-full border text-teal ml-2">
                         <input
                         {...register("password", { required: true })}
-                          type="text" 
-                          name="company-website" 
-                          id="company-website" 
+                          type="password" 
+                          name="password" 
+                          id="password" 
                           className="p-3 pl-6 rounded-full sm:text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-light focus:border-transparent" 
                           placeholder="Enter password" />
                       </div>
@@ -146,3 +102,20 @@ export default function Login() {
     </>
     )
   }
+
+  signIn.getInitialProps = async(context) => {
+    const {request, response} = context;
+    const session = await (getSession({request}));
+
+    if (session && response && session.accessToken) {
+        response.writeHead(302, {
+            Location: "/dashboard",
+        })
+        response.end();
+        return;
+    }
+    return {
+        session: undefined,
+        providers: await providers(context), 
+    }
+}
