@@ -1,21 +1,21 @@
-import React from "react";
-import Link from "next/link";
-import {signIn, signOut, useSession } from "next-auth/client";
+import React from 'react'
+import Link from 'next/link'
+import { signIn, signOut, useSession } from 'next-auth/client'
 
-export default function Home() {
-    const [session, loading, ] = useSession();
-    return (
+export default function Home () {
+  const [session] = useSession()
+  return (
         <>
         {
             !session && (
                 <>
                     Not signed in <br />
                     <button onClick={signIn}>Sign In</button>
-                </> 
-        )}
+                </>
+            )}
 
         {
-            session && ( 
+            session && (
                 <>
                     Signed in as {session.user.email} <br />
                     <div>You can now access our super secret pages</div>
@@ -27,5 +27,5 @@ export default function Home() {
             )
         }
         </>
-    )
+  )
 }
