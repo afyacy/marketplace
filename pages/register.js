@@ -8,7 +8,7 @@ import Head from 'next/head'
 export default function Register () {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const password = useRef({})
-  const router = useRouter()
+  //  const router = useRouter()
   password.current = watch('password', '')
 
   const registerUser = async (data) => {
@@ -25,10 +25,11 @@ export default function Register () {
       method: 'POST'
     })
     const result = await response.json()
-    if (result.message === 'New user created.') {
-      router.push('/home')
+    if (result.status === 302) {
+      message = 'User already exits'
+      //  router.push('/home')
     } else {
-      router.push('/register')
+      //  router.push('/register')
     }
   }
 

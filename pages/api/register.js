@@ -14,7 +14,7 @@ export default async function handler (request, response) {
       }
     })
     if (user) {
-      response.status(200).json({ message: 'User Already exists' })
+      response.status(302).json({ message: 'User Already exists' })
     } else {
       const newUser = await prisma.user.create({
         data: {
@@ -27,7 +27,7 @@ export default async function handler (request, response) {
       if (newUser) {
         response.status(200).json({ message: 'New user created.' })
       } else {
-        response.status(200).json({ message: 'Could not create a new user.' })
+        response.status(406).json({ message: 'Could not create a new user.' })
       }
     }
   }
