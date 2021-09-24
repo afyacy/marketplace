@@ -18,16 +18,10 @@ export default function Register () {
         email,
         password
       })
-      if (data) {
-        alert('User created successfully.')
-      }
+      alert(`Successfully registerd: ${data.email}`)
       router.push(redirect || '/')
     } catch (error) {
-      if (error.response.status === 406) {
-        alert('User already exists.')
-      } else if (error.response.status === 417) {
-        alert('Unexpected fail')
-      }
+      alert('User already exist or invalid details')
     }
   }
 
