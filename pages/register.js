@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import Image from 'next/image'
 import Navbar from '../components/layout/Navbar'
@@ -26,7 +25,6 @@ export default function Register () {
     })
     const result = await response.json()
     if (result.status === 302) {
-      message = 'User already exits'
       //  router.push('/home')
     } else {
       //  router.push('/register')
