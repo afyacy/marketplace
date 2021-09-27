@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 import { PrismaClient } from '@prisma/client'
+import bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
@@ -10,14 +11,12 @@ const configuration = {
       id: 'credentials',
       name: 'Login',
       async authorize (credentials) {
-        const user = await prisma.user.findFirst({
+        const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email,
-            password: credentials.password
+            email: credentials.email
           }
         })
-
-        if (user) {
+        if (user && bcrypt.compareSync(credentials.password, user.password)) {
           return user
         } else {
           return null
