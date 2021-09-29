@@ -8,8 +8,7 @@ export default function Login () {
 
   const loginUser = async (data) => {
     try {
-      // eslint-disable-next-line no-unused-vars
-      const result = await signIn('credentials', {
+      await signIn('credentials', {
         redirect: false,
         email: data.email,
         password: data.password
