@@ -19,7 +19,7 @@ model Company {
 model User {
   userId        Int       @default(autoincrement()) @id
   companyId     Int? 
-  worksAt   Company? @relation(fields: [companyId], references: [id])
+  company   Company? @relation(fields: [companyId], references: [id])
   email         String?   @unique
   name          String
   password      String
