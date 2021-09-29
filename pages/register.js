@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import axios from 'axios'
@@ -17,8 +18,8 @@ export default function Register () {
         email,
         password
       })
-      alert(`Successfully registerd: ${data.email}`)
-      router.push(redirect || '/')
+      alert('Successfully registered')
+      router.push(redirect || '/login')
     } catch (error) {
       alert('User already exist or invalid details')
     }

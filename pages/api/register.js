@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 //  pages/api/register.js
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
@@ -8,10 +9,15 @@ export default async function handler (request, response) {
   // Process a POST request
   const newUser = await prisma.user.create({
     data: {
-      companyId: 2,
       email: request.body.email,
       name: request.body.fullName,
-      password: await bcrypt.hashSync(request.body.password)
+      password: bcrypt.hashSync(request.body.password)
+    }
+  })
+
+  const newCompany = await prisma.company.create({
+    data: {
+      name: request.body.companyName
     }
   })
   response.status(200).send(newUser.email)
