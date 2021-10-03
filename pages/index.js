@@ -1,10 +1,11 @@
-import Navbar from '../components/layout/Navbar'
+import Navbar from '../components/landing-page/Navbar'
+import Hero from '../components/landing-page/Hero'
 
 export default function Home () {
   return (
     <>
       <Navbar />
-      <h1>MarketPlace</h1>
+      <Hero />
     </>
   )
 }
