@@ -1,11 +1,11 @@
-import { AnnotationIcon, GlobeAltIcon, LightningBoltIcon, DeviceMobileIcon } from '@heroicons/react/outline'
+import { CalendarIcon, GlobeAltIcon, LightningBoltIcon, DeviceMobileIcon } from '@heroicons/react/outline'
 
 const features = [
   {
     name: 'Manage all client appointments',
     description:
       'Manage all of your bookings through one online appointment scheduler. Seamless automation enables your business to run like clockwork.',
-    icon: AnnotationIcon,
+    icon: CalendarIcon,
   },
   {
     name: 'Build your online presence',
