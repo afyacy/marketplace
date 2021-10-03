@@ -10,7 +10,7 @@ export default function CallToAction() {
                 Transform your local business with Monto
               </p>
               <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                Try Monto, and explore all the tools and services you need to manage, run, and grow your business.
+                Try Monto, and explore all the tools and services you need to manage, run, and grow your local business.
               </p>
             </div>
             <div className="lg:mt-0 lg:flex-shrink-0">
