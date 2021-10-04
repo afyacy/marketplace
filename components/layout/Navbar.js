@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import Head from 'next/head'
 
@@ -20,23 +21,37 @@ export default function Navbar () {
           <div className="flex space-x-7">
             <div>
               {/* <!-- Website Logo --> */}
-                <a href="#" className="flex items-center py-4 px-2">
-                  <Image src='/images/logo.png' alt="Logo" className="h-8 w-10 mr-2" width="35px" height="30px"/>
-                  <span className="font-semibold text-gray-500 text-lg">MarketPlace</span>
-                </a>
+                <Link href="/">
+                  <a className="flex items-center py-4 px-2">
+                    <Image src='/images/logo.png' alt="Logo" className="h-8 w-10 mr-2" width="35px" height="30px"/>
+                    <span className="font-semibold text-gray-500 text-lg">MarketPlace</span>
+                  </a>
+                </Link>
               </div>
             </div>
             {/* <!-- Primary Navbar items --> */}
             <div className="hidden md:flex items-center space-x-2">
-              <a href="" className="py-4 px-2 text-green-500 border-b-4 border-teal-light font-semibold ">Home</a>
-              <a href="" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</a>
-              <a href="" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</a>
-              <a href="" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</a>
+              <Link href="#">
+                <a className="py-4 px-2 text-green-500 border-b-4 border-teal-light font-semibold ">Home</a>
+              </Link>
+              <Link href="#">
+                <a className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</a>
+              </Link>
+              <Link href="#">
+                <a className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</a>
+              </Link>
+              <Link href="#">
+                <a className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</a>
+              </Link>
             </div>
             {/* <!-- Secondary Navbar items --> */}
             <div className="hidden md:flex items-center space-x-3 ">
+            <Link href="/login">
               <a href="login" className="py-2 px-2 font-medium text-white rounded bg-teal-light hover:text-white transition duration-300">Log In</a>
-              <a href="register" className="py-2 px-2 font-medium bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</a>
+            </Link>
+            <Link href="/register">
+              <a className="py-2 px-2 font-medium bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</a>
+            </Link>
             </div>
             {/* <!-- Mobile menu button --> */}
             <div className="md:hidden flex items-center">
@@ -61,11 +76,31 @@ export default function Navbar () {
         display: showMe ? 'block' : 'none'
       }}>
         <ul>
-          <li><a href="#services" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Services</a></li>
-          <li><a href="#about" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">About</a></li>
-          <li><a href="#contact" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</a></li>
-          <li><a href="login" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Log In</a></li>
-          <li><a href="register" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Sign Up</a></li>
+          <li>
+            <Link href="#">
+              <a className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Services</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="#">
+              <a href="#about" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">About</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="#">
+              <a href="#contact" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="#">
+              <a href="login" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Log In</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="#">
+              <a href="/register" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Sign Up</a>
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
