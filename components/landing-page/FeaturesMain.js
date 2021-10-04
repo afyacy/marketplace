@@ -5,29 +5,29 @@ const features = [
     name: 'Manage all client appointments',
     description:
       'Manage all of your bookings through one online appointment scheduler. Seamless automation enables your business to run like clockwork.',
-    icon: CalendarIcon,
+    icon: CalendarIcon
   },
   {
     name: 'Build your online presence',
     description:
       'Create your online presence so the right people will find your business—no experience needed.',
-    icon: GlobeAltIcon,
+    icon: GlobeAltIcon
   },
   {
     name: 'Cut back on admin',
     description:
       'Save time with our all-in-one platform for managing your local business-so you can focus on the important things.',
-    icon: LightningBoltIcon,
+    icon: LightningBoltIcon
   },
   {
     name: 'All in one place, on any device',
     description:
       'Run your business from anywhere with one dashboard, available on desktop or mobile.',
-    icon: DeviceMobileIcon,
-  },
+    icon: DeviceMobileIcon
+  }
 ]
 
-export default function FeaturesMain() {
+export default function FeaturesMain () {
   return (
     <div className="py-12 my-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Hero() {
+export default function Hero () {
   return (
     <>
       <div className="max-w-7xl mt-10 mx-auto block lg:flex px-7">
