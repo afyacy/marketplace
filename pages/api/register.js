@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 //  pages/api/register.js
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
@@ -15,7 +14,7 @@ export default async function handler (request, response) {
     }
   })
 
-  const newCompany = await prisma.company.create({
+  await prisma.company.create({
     data: {
       name: request.body.companyName
     }
