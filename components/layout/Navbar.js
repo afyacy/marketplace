@@ -24,7 +24,7 @@ export default function Navbar () {
                 <Link href="/">
                   <a className="flex items-center py-4 px-2">
                     <Image src='/images/logo.png' alt="Logo" className="h-8 w-10 mr-2" width="35px" height="30px"/>
-                    <span className="font-semibold text-gray-500 text-lg">MarketPlace</span>
+                    <span className="font-semibold text-gray-500 text-lg">Monto</span>
                   </a>
                 </Link>
               </div>
