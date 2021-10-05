@@ -97,8 +97,8 @@ export default function Navbar () {
             </Link>
           </li>
           <li>
-            <Link href="#">
-              <a href="/register" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Sign Up</a>
+            <Link href="/register">
+              <a className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Sign Up</a>
             </Link>
           </li>
         </ul>
