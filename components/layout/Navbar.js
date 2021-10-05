@@ -32,9 +32,6 @@ export default function Navbar () {
             {/* <!-- Primary Navbar items --> */}
             <div className="hidden md:flex items-center space-x-2">
               <Link href="#">
-                <a className="py-4 px-2 text-green-500 border-b-4 border-teal-light font-semibold ">Home</a>
-              </Link>
-              <Link href="#">
                 <a className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</a>
               </Link>
               <Link href="#">
@@ -47,7 +44,7 @@ export default function Navbar () {
             {/* <!-- Secondary Navbar items --> */}
             <div className="hidden md:flex items-center space-x-3 ">
             <Link href="/login">
-              <a href="login" className="py-2 px-2 font-medium text-white rounded bg-teal-light hover:text-white transition duration-300">Log In</a>
+              <a className="py-2 px-2 font-medium text-white rounded bg-teal-light hover:text-white transition duration-300">Log In</a>
             </Link>
             <Link href="/register">
               <a className="py-2 px-2 font-medium bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</a>
@@ -83,17 +80,17 @@ export default function Navbar () {
           </li>
           <li>
             <Link href="#">
-              <a href="#about" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">About</a>
+              <a className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">About</a>
             </Link>
           </li>
           <li>
             <Link href="#">
-              <a href="#contact" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</a>
+              <a className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</a>
             </Link>
           </li>
           <li>
-            <Link href="#">
-              <a href="login" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Log In</a>
+            <Link href="/login">
+              <a className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Log In</a>
             </Link>
           </li>
           <li>
