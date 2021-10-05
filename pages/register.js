@@ -2,7 +2,9 @@
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import Link from 'next/link'
 import React, { useRef } from 'react'
+import Navbar from '../components/layout/Navbar'
 export default function Register () {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const password = useRef({})
@@ -27,6 +29,7 @@ export default function Register () {
 
   return (
     <>
+    <Navbar/>
       <form className="mt-8" onSubmit={handleSubmit(registerUser)}>
         <div className="sm:rounded-md sm:overflow-hidden">
           <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
@@ -113,7 +116,7 @@ export default function Register () {
                 </div>
               </div>
               <div className="text-center mt-2">
-                  Already have an account? <a href="login" className="text-teal-light"> Sign In</a>
+                  Already have an account? <Link href="/login"><a className="text-teal-light"> Sign In</a></Link>
               </div>
           </div>
         </div>

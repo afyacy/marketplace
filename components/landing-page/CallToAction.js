@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function CallToAction() {
+export default function CallToAction () {
   return (
     <>
       <div className="bg-white dark:bg-gray-800 ">

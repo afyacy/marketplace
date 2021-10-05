@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form'
+import Link from 'next/link'
 import { providers, signIn, getSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
+import Navbar from '../components/layout/Navbar'
 
 export default function Login () {
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -21,6 +23,7 @@ export default function Login () {
   return (
       // <!-- Login goes here -->
       <>
+      <Navbar/>
         <form className="mt-8" onSubmit={handleSubmit(loginUser)}>
           <div className="sm:rounded-md sm:overflow-hidden">
             <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
@@ -57,7 +60,7 @@ export default function Login () {
                 </div>
               </div>
               <div className="text-center mt-2">
-                  Don’t have an account? <a href="register" className="text-teal-light"> Sign Up</a>
+                  Don’t have an account? <Link href="/register"><a className="text-teal-light"> Sign Up</a></Link>
               </div>
           </div>
         </div>

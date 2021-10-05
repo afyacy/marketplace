@@ -1,8 +1,7 @@
 
 import Image from 'next/image'
 
-
-export default function Integrations() {
+export default function Integrations () {
   return (
     <div className="py-12 bg-blue-50 mt-24 mb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
