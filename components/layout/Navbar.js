@@ -15,7 +15,7 @@ export default function Navbar () {
     <Head>
       <title>MarketPlace</title>
     </Head>
-    <nav className="bg-white shadow-lg">
+    <nav className="bg-white shadow-sm">
       <div className="max mx-auto px-4">
         <div className="flex justify-between">
           <div className="flex space-x-7">
@@ -23,8 +23,7 @@ export default function Navbar () {
               {/* <!-- Website Logo --> */}
                 <Link href="/">
                   <a className="flex items-center py-4 px-2">
-                    <Image src='/images/logo.png' alt="Logo" className="h-8 w-10 mr-2" width="35px" height="30px"/>
-                    <span className="font-semibold text-gray-500 text-lg">Monto</span>
+                  <Image src='/images/logo.svg' alt="Logo" className="h-8 w-10 mr-2" width="132px" height="36px"/>
                   </a>
                 </Link>
               </div>
@@ -32,22 +31,24 @@ export default function Navbar () {
             {/* <!-- Primary Navbar items --> */}
             <div className="hidden md:flex items-center space-x-2">
               <Link href="#">
-                <a className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</a>
+                <a className="py-4 px-2 hover:text-green-500 transition duration-300">Services</a>
               </Link>
               <Link href="#">
-                <a className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</a>
+                <a className="py-4 px-2 hover:text-green-500 transition duration-300">About</a>
               </Link>
               <Link href="#">
-                <a className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</a>
+                <a className="py-4 px-2 hover:text-green-500 transition duration-300">Contact Us</a>
               </Link>
             </div>
             {/* <!-- Secondary Navbar items --> */}
             <div className="hidden md:flex items-center space-x-3 ">
             <Link href="/login">
-              <a className="py-2 px-2 font-medium text-white rounded bg-teal-light hover:text-white transition duration-300">Log In</a>
+              <a className="py-2 px-2 font-medium hover:text-gray-500 transition duration-300">Log In</a>
             </Link>
             <Link href="/register">
-              <a className="py-2 px-2 font-medium bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</a>
+            <a className="py-2 px-4 bg-teal-dark hover:bg-teal-default text-white font-semibold rounded-lg shadow-md focus:outline-none cursor-pointer">
+              Request Access
+            </a>
             </Link>
             </div>
             {/* <!-- Mobile menu button --> */}

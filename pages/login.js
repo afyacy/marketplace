@@ -24,7 +24,7 @@ export default function Login () {
       // <!-- Login goes here -->
       <>
       <Navbar/>
-        <form className="mt-8" onSubmit={handleSubmit(loginUser)}>
+        <form className="mt-8 md:w-5/12 m-auto" onSubmit={handleSubmit(loginUser)}>
           <div className="sm:rounded-md sm:overflow-hidden">
             <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
               <div className="col-span-3 sm:col-span-2">
@@ -34,7 +34,7 @@ export default function Login () {
                     type="text"
                     name="email"
                     id="email"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-light focus:border-transparent"
+                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
                     placeholder="Enter your email" />
                 </div>
                 {errors.email && <span className="ml-2">This field is required</span>}
@@ -47,20 +47,20 @@ export default function Login () {
                     type="password"
                     name="password"
                     id="password"
-                    className="p-3 pl-6 rounded-full sm:text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-light focus:border-transparent"
+                    className="p-3 pl-6 rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
                     placeholder="Enter password" />
                 </div>
                 {errors.password && <span className="ml-2">This field is required</span>}
               </div>
               <div className="col-span-3 sm:col-span-2 ">
                 <div className="flex text-teal ml-2 mt-16">
-                  <button type="submit" className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium  bg-teal-light hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <button type="submit" className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium bg-teal-dark hover:bg-teal-default text-white focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-none">
                     <span className="text-white  text-lg">Submit</span>
                   </button>
                 </div>
               </div>
               <div className="text-center mt-2">
-                  Don’t have an account? <Link href="/register"><a className="text-teal-light"> Sign Up</a></Link>
+                  Don’t have an account? <Link href="/register"><a className="text-teal-default"> Sign Up</a></Link>
               </div>
           </div>
         </div>

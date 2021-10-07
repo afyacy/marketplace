@@ -30,7 +30,7 @@ export default function Register () {
   return (
     <>
     <Navbar/>
-      <form className="mt-8" onSubmit={handleSubmit(registerUser)}>
+      <form className="mt-8 md:w-5/12 m-auto" onSubmit={handleSubmit(registerUser)}>
         <div className="sm:rounded-md sm:overflow-hidden">
           <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
               <div className="col-span-3 sm:col-span-2">
@@ -40,7 +40,7 @@ export default function Register () {
                     type="text"
                     name="companyName"
                     id="companyName"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-light focus:border-transparent"
+                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
                     placeholder="Enter company name" />
                 </div>
                 {errors.companyName && <span className="ml-2">This field is required</span>}
@@ -53,7 +53,7 @@ export default function Register () {
                     type="text"
                     name="fullName"
                     id="fullName"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-light focus:border-transparent"
+                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
                     placeholder="Enter your full name" />
                 </div>
                 {errors.fullName && <span className="ml-2">This field is required</span>}
@@ -66,7 +66,7 @@ export default function Register () {
                     type="text"
                     name="email"
                     id="email"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-light focus:border-transparent"
+                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
                     placeholder="Enter your email" />
                 </div>
                 {errors.email && <span className="ml-2">This field is required</span>}
@@ -86,7 +86,7 @@ export default function Register () {
                     type="password"
                     name="password"
                     id="password"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-light focus:border-transparent"
+                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
                     placeholder="Enter password" />
                 </div>
                 {errors.password && <span className="ml-2">{errors.password.message}</span>}
@@ -102,7 +102,7 @@ export default function Register () {
                     type="password"
                     name="repeatPassword"
                     id="repeatPassword"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-light focus:border-transparent"
+                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
                     placeholder="Repeat password" />
                 </div>
                 {errors.repeatPassword && <span className="ml-2">{errors.repeatPassword.message}</span>}
@@ -110,7 +110,7 @@ export default function Register () {
 
               <div className="col-span-3 sm:col-span-2 ">
                 <div className="flex rounded-md text-teal ml-2 mt-16">
-                  <button type="submit" className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium  bg-teal-light hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <button type="submit" className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium bg-teal-dark hover:bg-teal-default focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     <span className="text-white text-lg">Register</span>
                   </button>
                 </div>
