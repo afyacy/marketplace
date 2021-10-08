@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSession } from 'next-auth/client'
 import router from 'next/router'
+import Navbar from '../components/layout/Navbar'
 
 export default function Home () {
   const [session] = useSession()
@@ -12,10 +13,9 @@ export default function Home () {
   }, [])
 
   return (
-    <main>
-      <div>
+    <>
+      <Navbar />
         <h1> Protected Page | Home </h1>
-      </div>
-    </main>
+    </>
   )
 }
