@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSession } from 'next-auth/client'
 import router from 'next/router'
 import Navbar from '../components/layout/Navbar'
+import Booking from '../components/event/booking'
 
 export default function Home () {
   const [session] = useSession()
@@ -15,7 +16,7 @@ export default function Home () {
   return (
     <>
       <Navbar />
-        <h1> Protected Page | Home </h1>
+      <Booking />
     </>
   )
 }
