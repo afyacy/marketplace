@@ -28,8 +28,8 @@ model User {
 
 model Event {
   eventId     Int       @default(autoincrement()) @id
-  startDate   String
-  endDate     String
+  startDate   DateTime
+  endDate     DateTime
   name        String
   user        String
   attendees   Attendee[]
