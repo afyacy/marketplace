@@ -12,7 +12,7 @@ export default function Booking () {
         data
       })
       alert('Success')
-      router.push('/')
+      router.push('/booking/successBooking')
     } catch (error) {
       alert(error)
     }
