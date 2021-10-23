@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import axios from 'axios'
@@ -9,19 +8,13 @@ export default function Register () {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const password = useRef({})
   const router = useRouter()
-  const { redirect } = router.query
   password.current = watch('password', '')
 
-  const registerUser = async ({ companyName, fullName, email, password }) => {
+  const registerUser = async (data) => {
     try {
-      const { data } = await axios.post('/api/register', {
-        companyName,
-        fullName,
-        email,
-        password
-      })
-      alert('Successfully registered')
-      router.push(redirect || '/login')
+      await axios.post('api/register', data)
+      alert('sucess')
+      router.push('login')
     } catch (error) {
       alert('User already exist or invalid details')
     }
