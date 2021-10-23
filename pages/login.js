@@ -17,7 +17,7 @@ export default function Login () {
       })
       router.push('booking/[email]', `/booking/${data.email}`)
     } catch (error) {
-      alert(error)
+      alert('Login failed')
     }
   }
   return (
