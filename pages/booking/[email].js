@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSession } from 'next-auth/client'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import router from 'next/router'
-import Navbar from '../../components/layout/Navbar'
 import { PrismaClient } from '@prisma/client'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import Navbar from '../../components/layout/Navbar'
+import Appointment from '../../components/booking/appointment'
 
 export default function Email ({ email, fullName }) {
   const [session] = useSession()
@@ -11,11 +11,13 @@ export default function Email ({ email, fullName }) {
   const [value] = useState(`${link}booking/${email}`)
   const [copySuccess, setCopySuccess] = useState('copy')
 
-  useEffect(() => {
-    if (!session) {
-      router.push('/login')
-    }
-  }, [])
+  if (!session) {
+    return (
+      <>
+        <Appointment name={fullName}/>
+      </>
+    )
+  }
 
   return (
     <div>
