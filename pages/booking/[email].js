@@ -5,16 +5,18 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Navbar from '../../components/layout/Navbar'
 import Appointment from '../../components/booking/appointment'
 
-export default function Email ({ email, fullName }) {
+export default function Email ({ email, fullName, userId, events }) {
   const [session] = useSession()
   const link = 'https://www.getmonto.com/'
   const [value] = useState(`${link}booking/${email}`)
   const [copySuccess, setCopySuccess] = useState('copy')
-
+  const [attendees] = events
+  const attendeeName = attendees.attendees[0].name
+  const attendeeEmail = attendees.attendees[0].email
   if (!session) {
     return (
       <>
-        <Appointment name={fullName}/>
+        <Appointment name={fullName} userId={userId}/>
       </>
     )
   }
@@ -44,8 +46,48 @@ export default function Email ({ email, fullName }) {
             </button>
           </div>
         </div>
-
-        <button>See events</button>
+      </div>
+      <div className="shadow-sm w-8/12 m-auto my-6">
+        <h1 className="text-3xl text-gray-700">Events</h1>
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Title
+              </th>
+              <th scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Location
+              </th>
+              <th scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">State Date
+              </th>
+              <th scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  End Date
+              </th>
+              <th scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attendee Name
+              </th>
+              <th scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attendee Email
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200 text-sm text-gray-700">
+            {events.map((event) => (
+            <tr key={event.id}>
+              <td className="px-6 py-4 whitespace-nowrap">{event.title}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{event.location}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{event.startDate}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{event.endDate}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{attendeeName}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{attendeeEmail}</td>
+            </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   )
@@ -56,7 +98,17 @@ export async function getServerSideProps ({ query }) {
   const user = await prisma.user.findUnique({ where: query })
   const email = user.email
   const fullName = user.fullName
+  const userId = user.id
+
+  const events = await prisma.event.findMany({
+    where: {
+      userId: userId
+    },
+    include: {
+      attendees: { select: { name: true, email: true } }
+    }
+  })
   return {
-    props: { email, fullName }
+    props: { email, fullName, userId, events: JSON.parse(JSON.stringify(events)) }
   }
 }

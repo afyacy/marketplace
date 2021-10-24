@@ -3,15 +3,22 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export default async function handler (request, response) {
+  //  For Some reason the variables end up being undefined inside prisma instantiation
+  //  Kindly check if I am doing something uncalled for
+  //  const { name, email, title, location, startDate, endDate, userId } = request.body
   await prisma.event.create({
     data: {
-      startDate: new Date(Date.parse(request.body.data.startDate)),
-      endDate: new Date(Date.parse(request.body.data.endDate)),
-      name: request.body.data.eventName,
-      user: request.body.data.companyEmail,
+      title: 'Makeup',
+      location: 'Asokwa',
+      startDate: new Date('09/12/2021'),
+      endDate: new Date('09/12/2021'),
+      user: { connect: { id: 1 } },
       attendees: {
         create: [
-          { email: request.body.data.email, name: request.body.data.name }
+          {
+            name: 'Roda',
+            email: 'roda@menubar.com'
+          }
         ]
       }
     }

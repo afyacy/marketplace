@@ -4,22 +4,19 @@ import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 
-export default function Appointment ({ name }) {
+export default function Appointment ({ name, userId }) {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const router = useRouter()
-  const onSubmit = async (data) => {
+  const onSubmit = async ({ name, email, title, location, startDate, endDate }) => {
     try {
-      // await axios.post('/api/booking', {
-      //   data
-      // })
-      // alert('Success')
-      console.log(data)
+      await axios.post('/api/booking', {
+        name, email, title, location, startDate, endDate, userId
+      })
       router.push('/booking/successBooking')
     } catch (error) {
       alert('Booking failed')
     }
-    console.log(data)
   }
   return (
     <div>
