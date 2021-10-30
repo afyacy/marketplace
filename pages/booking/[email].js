@@ -10,9 +10,6 @@ export default function Email ({ email, fullName, userId, events }) {
   const link = 'https://www.getmonto.com/'
   const [value] = useState(`${link}booking/${email}`)
   const [copySuccess, setCopySuccess] = useState('copy')
-  const [attendees] = events
-  const attendeeName = attendees.attendees[0].name
-  const attendeeEmail = attendees.attendees[0].email
   if (!session) {
     return (
       <>
@@ -76,16 +73,16 @@ export default function Email ({ email, fullName, userId, events }) {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 text-sm text-gray-700">
-            {events.map((event) => (
+           {events.map((event) => (
             <tr key={event.id}>
               <td className="px-6 py-4 whitespace-nowrap">{event.title}</td>
               <td className="px-6 py-4 whitespace-nowrap">{event.location}</td>
               <td className="px-6 py-4 whitespace-nowrap">{event.startDate}</td>
               <td className="px-6 py-4 whitespace-nowrap">{event.endDate}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{attendeeName}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{attendeeEmail}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{event.attendee.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{event.attendee.email}</td>
             </tr>
-            ))}
+           ))}
           </tbody>
         </table>
       </div>
@@ -105,7 +102,7 @@ export async function getServerSideProps ({ query }) {
       userId: userId
     },
     include: {
-      attendees: { select: { name: true, email: true } }
+      attendee: { select: { name: true, email: true } }
     }
   })
   return {

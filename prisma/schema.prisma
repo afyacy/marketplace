@@ -35,8 +35,8 @@ model Event {
   endDate     DateTime
   userId      Int
   user        User @relation(fields: [userId], references: [id])
-  attendees Attendee[] 
-  @@map("events")
+  attendee Attendee?
+  @@map("event")
 }
 
 model Attendee {
@@ -45,5 +45,5 @@ model Attendee {
   email       String
   eventId     Int
   event       Event @relation(fields: [eventId], references: [id])
-  @@map("attendees")
+  @@map("attendee")
 }

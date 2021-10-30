@@ -11,13 +11,11 @@ export default async function handler (request, response) {
       startDate: new Date(startDate),
       endDate: new Date(endDate),
       user: { connect: { id: userId } },
-      attendees: {
-        create: [
-          {
-            name: name,
-            email: email
-          }
-        ]
+      attendee: {
+        create: {
+          name: name,
+          email: email
+        }
       }
     }
   })
