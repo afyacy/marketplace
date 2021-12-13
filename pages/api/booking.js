@@ -3,16 +3,19 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export default async function handler (request, response) {
+  const { name, email, title, location, startDate, endDate, userId } = request.body
   await prisma.event.create({
     data: {
-      startDate: new Date(Date.parse(request.body.data.startDate)),
-      endDate: new Date(Date.parse(request.body.data.endDate)),
-      name: request.body.data.eventName,
-      user: request.body.data.companyEmail,
-      attendees: {
-        create: [
-          { email: request.body.data.email, name: request.body.data.name }
-        ]
+      title: title,
+      location: location,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
+      user: { connect: { id: userId } },
+      attendee: {
+        create: {
+          name: name,
+          email: email
+        }
       }
     }
   })

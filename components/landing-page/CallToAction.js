@@ -14,9 +14,9 @@ export default function CallToAction () {
               </p>
             </div>
             <div className="lg:mt-0 lg:flex-shrink-0">
-                <div className="mt-8 inline-flex rounded-md shadow">
+                <div className="mt-8 inline-flex rounded-md">
                   <Link href="/register">
-                    <a className="py-2 px-4 bg-blue-800 text-gray-100 font-semibold rounded-lg shadow-md focus:outline-none cursor-pointer">
+                    <a className="py-2 px-4 bg-green-light text-white rounded-full focus:outline-none cursor-pointer">
                       Request Access
                     </a>
                   </Link>

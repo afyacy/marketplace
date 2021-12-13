@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import Link from 'next/link'
-import { providers, signIn, getSession } from 'next-auth/client'
+import { signIn } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import Navbar from '../components/layout/Navbar'
 
@@ -15,13 +15,12 @@ export default function Login () {
         email: data.email,
         password: data.password
       })
-      router.push('/home')
+      router.push('booking/[email]', `/booking/${data.email}`)
     } catch (error) {
-      alert(error)
+      alert('Login failed')
     }
   }
   return (
-      // <!-- Login goes here -->
       <>
       <Navbar/>
         <form className="mt-8 md:w-5/12 m-auto" onSubmit={handleSubmit(loginUser)}>
@@ -67,21 +66,4 @@ export default function Login () {
       </form>
     </>
   )
-}
-
-signIn.getInitialProps = async (context) => {
-  const { request, response } = context
-  const session = await (getSession({ request }))
-
-  if (session && response && session.accessToken) {
-    response.writeHead(302, {
-      Location: '/dashboard'
-    })
-    response.end()
-    return
-  }
-  return {
-    session: undefined,
-    providers: await providers(context)
-  }
 }
