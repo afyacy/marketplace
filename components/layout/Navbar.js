@@ -17,7 +17,7 @@ export default function Navbar () {
     <Head>
       <title>MarketPlace</title>
     </Head>
-    <nav className="bg-white shadow-sm">
+    <nav className="bg-white text-gray-600">
       <div className="max mx-auto px-4">
         <div className="flex justify-between">
           <div className="flex space-x-7">
@@ -33,13 +33,13 @@ export default function Navbar () {
             {/* <!-- Primary Navbar items --> */}
             <div className="hidden md:flex items-center space-x-2">
               <Link href="#">
-                <a className="py-4 px-2 hover:text-green-500 transition duration-300">Services</a>
+                <a className="py-4 px-2 hover:text-green-light cursor-pointer transition duration-300">Salons</a>
               </Link>
               <Link href="#">
-                <a className="py-4 px-2 hover:text-green-500 transition duration-300">About</a>
+                <a className="py-4 px-2 hover:text-green-light cursor-pointer transition duration-300">Mechanics</a>
               </Link>
               <Link href="#">
-                <a className="py-4 px-2 hover:text-green-500 transition duration-300">Contact Us</a>
+                <a className="py-4 px-2 hover:text-green-light cursor-pointer transition duration-300">More</a>
               </Link>
             </div>
             {/* <!-- Secondary Navbar items --> */}
@@ -48,11 +48,13 @@ export default function Navbar () {
                 !loading && !session && (
                   <>
                     <Link href="/login">
-                      <a className="py-2 px-2 font-medium hover:text-gray-500 transition duration-300">Log In</a>
+                    <a className="py-2 px-4 hover:text-green-light cursor-pointer mx-4">
+                      Log In
+                    </a>
                     </Link>
                     <Link href="/register">
-                    <a className="py-2 px-4 bg-teal-dark hover:bg-teal-default text-white font-semibold rounded-lg shadow-md focus:outline-none cursor-pointer">
-                      Request Access
+                      <a className="py-3 px-8 bg-green-light text-white rounded-full shadow-sm hover:bg-green-default   focus:outline-none cursor-pointer">
+                      Sign Up
                     </a>
                     </Link>
                   </>
