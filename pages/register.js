@@ -25,6 +25,38 @@ export default function Register () {
       <form className="mt-8 md:w-5/12 m-auto" onSubmit={handleSubmit(registerUser)}>
         <div className="sm:rounded-md sm:overflow-hidden">
           <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
+              <div>
+                <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Full Name</label>
+                  <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="John Doe"/>
+              </div>
+              <div>
+                <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Company Name</label>
+                  <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="Vestir Mart Ent"/>
+              </div>
+              <div>
+                <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Password</label>
+                  <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="******"/>
+              </div>
+              <div>
+                <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Repeat Password</label>
+                  <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="******"/>
+              </div>
+              <div>
+                <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">What do you do?</label>
+                <select name="category" className="text-gray-900 text-sm w-full p-2.5">
+                  <option>Choose a category</option>
+                  <option value="1">Salon</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Last Name</label>
+                <div className="mt-1 relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i className='fa fa-user'></i>
+                  </div>
+                  <input type="text" id="email-adress-icon" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full pl-10 p-2.5" placeholder="name@gmail.com"/>
+                </div>
+              </div>
               <div className="col-span-3 sm:col-span-2">
                 <div className="mt-1 flex rounded-full border text-teal ml-2">
                   <input
@@ -32,7 +64,7 @@ export default function Register () {
                     type="text"
                     name="companyName"
                     id="companyName"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
+                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent"
                     placeholder="Enter company name" />
                 </div>
                 {errors.companyName && <span className="ml-2">This field is required</span>}
@@ -102,13 +134,13 @@ export default function Register () {
 
               <div className="col-span-3 sm:col-span-2 ">
                 <div className="flex rounded-md text-teal ml-2 mt-16">
-                  <button type="submit" className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium bg-teal-dark hover:bg-teal-default focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <button type="submit" className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium bg-green-light hover:bg-green-default focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     <span className="text-white text-lg">Register</span>
                   </button>
                 </div>
               </div>
               <div className="text-center mt-2">
-                  Already have an account? <Link href="/login"><a className="text-teal-light"> Sign In</a></Link>
+                  Already have an account? <Link href="/login"><a className="hover:text-black text-green-light"> Sign In</a></Link>
               </div>
           </div>
         </div>
