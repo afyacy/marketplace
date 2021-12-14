@@ -42,10 +42,13 @@ export default function Register () {
                   <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="******"/>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">What do you do?</label>
-                <select name="category" className="text-gray-900 text-sm w-full p-2.5">
+                <label className="text-sm font-medium text-gray-900 block mb-2">What do you do?</label>
+                <select name="category" className="text-gray-900 text-sm w-full p-2.5 bg-gray-50 border border-gray-300">
                   <option>Choose a category</option>
                   <option value="1">Salon</option>
+                  <option value="2">Plumber</option>
+                  <option value="3">Electrician</option>
+                  <option value="14">Painter</option>
                 </select>
               </div>
               <div>
@@ -56,6 +59,10 @@ export default function Register () {
                   </div>
                   <input type="text" id="email-adress-icon" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full pl-10 p-2.5" placeholder="name@gmail.com"/>
                 </div>
+              </div>
+              <div>
+                <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Mobile No.</label>
+                  <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="0501431357"/>
               </div>
               <div className="col-span-3 sm:col-span-2">
                 <div className="mt-1 flex rounded-full border text-teal ml-2">
