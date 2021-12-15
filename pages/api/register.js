@@ -3,20 +3,26 @@ import prisma from '../../lib/prisma'
 import bcrypt from 'bcryptjs'
 
 export default async function handler (request, response) {
+  const { mediaUrl, fullName, companyName, email, password, category, mobile, town, city, region, description } = request.body
+  const salt = bcrypt.genSaltSync(10)
+  const hashedPassword = await bcrypt.hashSync(password, salt)
+
   const newUser = await prisma.company.create({
     data: {
-      name: request.body.companyName,
+      name: companyName,
       users: {
         create: [
           {
-            fullName: request.body.data.fullName,
-            email: request.body.data.email,
-            password: await bcrypt.hash(request.body.data.password, 3),
-            category: request.body.data.category,
-            mobile: request.body.data.mobile,
-            town: request.body.data.town,
-            city: request.body.data.city,
-            region: request.body.data.region
+            fullName: fullName,
+            email: email,
+            password: hashedPassword,
+            category: category,
+            mobile: mobile,
+            mediaUrl: mediaUrl,
+            town: town,
+            city: city,
+            region: region,
+            description: description
           }
         ]
       }

@@ -23,9 +23,11 @@ model User {
   password    String
   category    String
   mobile      String
+  mediaUrl    String
   town        String
   city        String
   region      String
+  description String
   companyId   Int?
   company     Company? @relation(fields: [companyId], references: [id])
   events Event[]

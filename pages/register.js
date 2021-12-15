@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-//  import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import axios from 'axios'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
@@ -8,7 +8,7 @@ export default function Register () {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const password = useRef({})
   password.current = watch('password', '')
-  //  const router = useRouter()
+  const router = useRouter()
 
   const [media, setMedia] = useState('')
 
@@ -24,12 +24,12 @@ export default function Register () {
     return res2.url
   }
 
-  const registerUser = async (data) => {
+  const registerUser = async ({ fullName, companyName, email, password, category, mobile, town, city, region, description }) => {
     try {
       const mediaUrl = await imageUpload()
-      await axios.post('api/register', { mediaUrl, data })
-      //  alert('sucess')
-      //  router.push('login')
+      await axios.post('api/register', { mediaUrl, fullName, companyName, email, password, category, mobile, town, city, region, description })
+      alert('sucess')
+      router.push('login')
     } catch (error) {
       alert('User already exist or invalid details')
     }
@@ -52,7 +52,7 @@ export default function Register () {
                 {errors.fullName && <span className="ml-2 text-red-400">This field is required</span>}
               </div>
               <div>
-                <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Company Name</label>
+                <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Company Name</label>
                   <input
                     {...register('companyName', { required: true })}
                     type="text"
@@ -62,7 +62,17 @@ export default function Register () {
                   {errors.companyName && <span className="ml-2 text-red-400">This field is required</span>}
               </div>
               <div>
-                <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Password</label>
+                <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Email</label>
+                  <input
+                    {...register('email', { required: true })}
+                    type="text"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"
+                    placeholder="me@gmail.com"
+                  />
+                  {errors.email && <span className="ml-2 text-red-400">This field is required</span>}
+              </div>
+              <div>
+                <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Password</label>
                   <input
                     {...register('password', {
                       required: 'You must specify a password',
@@ -172,12 +182,14 @@ export default function Register () {
               <div>
                 <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Description</label>
                 <textarea
+                  {...register('description', { required: true })}
                   placeholder="I have been doing this for a number of
                   years for many people with exceptional
                   experience in the industry I do great with
                   every job I get..."
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"
                   rows={4}></textarea>
+                  {errors.description && <span className="ml-2 text-red-400">{errors.description.message}</span>}
               </div>
               <div className="col-span-3 sm:col-span-2 ">
                 <div className="flex rounded-md text-teal ml-2 mt-16">
