@@ -1,19 +1,35 @@
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
+//  import { useRouter } from 'next/router'
 import axios from 'axios'
 import Link from 'next/link'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Navbar from '../components/layout/Navbar'
 export default function Register () {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const password = useRef({})
-  const router = useRouter()
   password.current = watch('password', '')
+  //  const router = useRouter()
+
+  const [media, setMedia] = useState('')
+
+  const imageUpload = async () => {
+    const data = new FormData()
+    data.append('file', media)
+    data.append('upload_preset', 'marketplace_uploads')
+    const res = await fetch('https://api.cloudinary.com/v1_1/afyacy/image/upload', {
+      method: 'POST',
+      body: data
+    })
+    const res2 = await res.json()
+    return res2.url
+  }
+
   const registerUser = async (data) => {
     try {
-      await axios.post('api/register', data)
-      alert('sucess')
-      router.push('login')
+      const mediaUrl = await imageUpload()
+      await axios.post('api/register', { mediaUrl, data })
+      //  alert('sucess')
+      //  router.push('login')
     } catch (error) {
       alert('User already exist or invalid details')
     }
@@ -22,28 +38,59 @@ export default function Register () {
   return (
     <>
     <Navbar/>
-      <form className="mt-8 md:w-5/12 m-auto" onSubmit={handleSubmit(registerUser)}>
+      <form className="mt-8 md:w-5/12 m-auto" onSubmit={handleSubmit(registerUser)} encType="multipart/form-data">
         <div className="sm:rounded-md sm:overflow-hidden">
           <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
               <div>
                 <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Full Name</label>
-                  <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="John Doe"/>
+                <input
+                  {...register('fullName', { required: true })}
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"
+                  placeholder="John Doe"
+                />
+                {errors.fullName && <span className="ml-2 text-red-400">This field is required</span>}
               </div>
               <div>
                 <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Company Name</label>
-                  <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="Vestir Mart Ent"/>
+                  <input
+                    {...register('companyName', { required: true })}
+                    type="text"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"
+                    placeholder="Vestir Mart Ent"
+                  />
+                  {errors.companyName && <span className="ml-2 text-red-400">This field is required</span>}
               </div>
               <div>
                 <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Password</label>
-                  <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="******"/>
+                  <input
+                    {...register('password', {
+                      required: 'You must specify a password',
+                      minLength: {
+                        message: 'Password must have at least 4 characters'
+                      }
+                    })}
+                    type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="******"/>
+                    {errors.password && <span className="ml-2 text-red-400">{errors.password.message}</span>}
               </div>
               <div>
                 <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Repeat Password</label>
-                  <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="******"/>
+                <input
+                  {...register('repeatPassword', {
+                    validate: value => value === password.current || 'The passwords do not match'
+                  })}
+                  type="password"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"
+                  placeholder="******"
+                />
+                {errors.repeatPassword && <span className="ml-2 text-red-400">{errors.repeatPassword.message}</span>}
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-900 block mb-2">What do you do?</label>
-                <select name="category" className="text-gray-900 text-sm w-full p-2.5 bg-gray-50 border border-gray-300">
+                <select
+                  name="category"
+                  className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"
+                  {...register('category', { required: true })}>
                   <option>Choose a category</option>
                   <option value="1">Salon</option>
                   <option value="2">Plumber</option>
@@ -52,93 +99,85 @@ export default function Register () {
                 </select>
               </div>
               <div>
-                <label htmlFor="email-adress-icon" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Last Name</label>
-                <div className="mt-1 relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i className='fa fa-user'></i>
-                  </div>
-                  <input type="text" id="email-adress-icon" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full pl-10 p-2.5" placeholder="name@gmail.com"/>
+                <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Mobile No.</label>
+                  <input
+                    {...register('mobile', { required: true })}
+                    type="text"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="0501431357"/>
+                    {errors.mobile && <span className="ml-2 text-red-400">{errors.mobile.message}</span>}
+              </div>
+              <div>
+                <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Picture</label>
+                <fieldset className="w-full space-y-1 border-2 border-dashed rounded-md">
+                <div className="flex">
+                  <input
+                    accept="image/*"
+                    onChange={
+                      (e) => {
+                        setMedia(e.target.files[0])
+                      }
+                    }
+                    type="file"
+                    className="px-8 py-12"/>
+                  <img src={media ? URL.createObjectURL(media) : '' } className="w-20 h-20 rounded-full my-auto"/>
+                </div>
+              </fieldset>
+              </div>
+              <div className="flex">
+                <div className="mr-20">
+                  <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Town</label>
+                  <input
+                    {...register('town', { required: true })}
+                    type="text"
+                    placeholder="Asokwa"
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" />
+                    {errors.town && <span className="ml-2 text-red-400">{errors.town.message}</span>}
+                </div>
+                <div className="mr-20">
+                  <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">City</label>
+                  <input
+                    {...register('city', { required: true })}
+                    type="text"
+                    placeholder="Kumasi"
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"/>
+                    {errors.city && <span className="ml-2 text-red-400">{errors.city.message}</span>}
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Region</label>
+                  <select
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"
+                    {...register('region', { required: true })}>
+                    <option>Choose a category</option>
+                    <option value="1">Ahofo Region</option>
+                    <option value="2">Ashanti Region</option>
+                    <option value="3">Bono East Region</option>
+                    <option value="4">Bono Region</option>
+                    <option value="5">Central Region</option>
+                    <option value="6">Eastern Region</option>
+                    <option value="7">Greater Accra Region</option>
+                    <option value="8">North East Region</option>
+                    <option value="9">Northern Region</option>
+                    <option value="10">Oti Region</option>
+                    <option value="11">Savannah Region</option>
+                    <option value="12">Upper East Region</option>
+                    <option value="13">Upper West Region</option>
+                    <option value="14">Volta Region</option>
+                    <option value="15">Western North Region</option>
+                    <option value="16">Western Region</option>
+                  </select>
+                  {errors.region && <span className="ml-2 text-red-400">{errors.region.message}</span>}
                 </div>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Mobile No.</label>
-                  <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5" placeholder="0501431357"/>
+                <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Description</label>
+                <textarea
+                  placeholder="I have been doing this for a number of
+                  years for many people with exceptional
+                  experience in the industry I do great with
+                  every job I get..."
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"
+                  rows={4}></textarea>
               </div>
-              <div className="col-span-3 sm:col-span-2">
-                <div className="mt-1 flex rounded-full border text-teal ml-2">
-                  <input
-                    {...register('companyName', { required: true })}
-                    type="text"
-                    name="companyName"
-                    id="companyName"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent"
-                    placeholder="Enter company name" />
-                </div>
-                {errors.companyName && <span className="ml-2">This field is required</span>}
-              </div>
-
-              <div className="col-span-3 sm:col-span-2">
-                <div className="mt-1 flex rounded-full border text-teal ml-2">
-                  <input
-                    {...register('fullName', { required: true })}
-                    type="text"
-                    name="fullName"
-                    id="fullName"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
-                    placeholder="Enter your full name" />
-                </div>
-                {errors.fullName && <span className="ml-2">This field is required</span>}
-              </div>
-
-              <div className="col-span-3 sm:col-span-2">
-                <div className="mt-1 flex rounded-full border text-teal ml-2">
-                  <input
-                    {...register('email', { required: true })}
-                    type="text"
-                    name="email"
-                    id="email"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
-                    placeholder="Enter your email" />
-                </div>
-                {errors.email && <span className="ml-2">This field is required</span>}
-              </div>
-
-              <div className="col-span-3 sm:col-span-2">
-                <div className="mt-1 flex rounded-full border text-teal ml-2">
-                  <input
-                    {...register('password',
-                      {
-                        required: 'You must specify a password',
-                        minLength: {
-                          value: 4,
-                          message: 'Password must have at least 4 characters'
-                        }
-                      })}
-                    type="password"
-                    name="password"
-                    id="password"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
-                    placeholder="Enter password" />
-                </div>
-                {errors.password && <span className="ml-2">{errors.password.message}</span>}
-              </div>
-
-              <div className="col-span-3 sm:col-span-2">
-                <div className="mt-1 flex rounded-full border text-teal ml-2">
-                  <input
-                    {...register('repeatPassword',
-                      {
-                        validate: value => value === password.current || 'The passwords do not match'
-                      })}
-                    type="password"
-                    name="repeatPassword"
-                    id="repeatPassword"
-                    className="p-3 pl-6 rounded rounded-full sm:text-sm w-full focus:outline-none focus:ring-1 focus:ring-teal-light focus:border-transparent"
-                    placeholder="Repeat password" />
-                </div>
-                {errors.repeatPassword && <span className="ml-2">{errors.repeatPassword.message}</span>}
-              </div>
-
               <div className="col-span-3 sm:col-span-2 ">
                 <div className="flex rounded-md text-teal ml-2 mt-16">
                   <button type="submit" className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium bg-green-light hover:bg-green-default focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
