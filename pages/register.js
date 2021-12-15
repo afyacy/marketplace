@@ -92,11 +92,12 @@ export default function Register () {
                   className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"
                   {...register('category', { required: true })}>
                   <option>Choose a category</option>
-                  <option value="1">Salon</option>
-                  <option value="2">Plumber</option>
-                  <option value="3">Electrician</option>
-                  <option value="14">Painter</option>
+                  <option value="Salon">Salon</option>
+                  <option value="Plumber">Plumber</option>
+                  <option value="Electrician">Electrician</option>
+                  <option value="Painter">Painter</option>
                 </select>
+                {errors.category && <span className="ml-2 text-red-400">{errors.category.message}</span>}
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Mobile No.</label>
@@ -148,22 +149,22 @@ export default function Register () {
                     className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-green-light focus:border-transparent block w-full p-2.5"
                     {...register('region', { required: true })}>
                     <option>Choose a category</option>
-                    <option value="1">Ahofo Region</option>
-                    <option value="2">Ashanti Region</option>
-                    <option value="3">Bono East Region</option>
-                    <option value="4">Bono Region</option>
-                    <option value="5">Central Region</option>
-                    <option value="6">Eastern Region</option>
-                    <option value="7">Greater Accra Region</option>
-                    <option value="8">North East Region</option>
-                    <option value="9">Northern Region</option>
-                    <option value="10">Oti Region</option>
-                    <option value="11">Savannah Region</option>
-                    <option value="12">Upper East Region</option>
-                    <option value="13">Upper West Region</option>
-                    <option value="14">Volta Region</option>
-                    <option value="15">Western North Region</option>
-                    <option value="16">Western Region</option>
+                    <option value="Ahofo Region">Ahofo Region</option>
+                    <option value="Ashanti Region">Ashanti Region</option>
+                    <option value="Bono East Region">Bono East Region</option>
+                    <option value="Bono Region">Bono Region</option>
+                    <option value="Central Region">Central Region</option>
+                    <option value="Eastern Region">Eastern Region</option>
+                    <option value="Greater Accra Region">Greater Accra Region</option>
+                    <option value="North East Region">North East Region</option>
+                    <option value="Northern Region">Northern Region</option>
+                    <option value="Oti Region">Oti Region</option>
+                    <option value="Savannah Region">Savannah Region</option>
+                    <option value="Upper East Region">Upper East Region</option>
+                    <option value="Upper West Region">Upper West Region</option>
+                    <option value="Volta Region">Volta Region</option>
+                    <option value="Western North Region">Western North Region</option>
+                    <option value="Western Region">Western Region</option>
                   </select>
                   {errors.region && <span className="ml-2 text-red-400">{errors.region.message}</span>}
                 </div>

@@ -1,38 +1,26 @@
 
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../lib/prisma'
 import bcrypt from 'bcryptjs'
 
-const prisma = new PrismaClient()
-
 export default async function handler (request, response) {
-  console.log(request)
-  // const newUser = await prisma.company.create({
-  //   data: {
-  //     name: request.body.companyName,
-  //     users: {
-  //       create: [
-  //         {
-  //           fullName: request.body.fullName,
-  //           email: request.body.email,
-  //           password: await bcrypt.hash(request.body.password, 3)
-  //         }
-  //       ]
-  //     }
-  //   }
-  // })
-  response.status(200).send('newUser')
+  const newUser = await prisma.company.create({
+    data: {
+      name: request.body.companyName,
+      users: {
+        create: [
+          {
+            fullName: request.body.data.fullName,
+            email: request.body.data.email,
+            password: await bcrypt.hash(request.body.data.password, 3),
+            category: request.body.data.category,
+            mobile: request.body.data.mobile,
+            town: request.body.data.town,
+            city: request.body.data.city,
+            region: request.body.data.region
+          }
+        ]
+      }
+    }
+  })
+  response.status(200).send(newUser)
 }
-
-// body: {
-//   mediaUrl: 'http://res.cloudinary.com/afyacy/image/upload/v1639547304/tjtrrpvmm22d0zpirvjp.png',
-//   data: {
-//     fullName: 'Charity Darko',
-//     companyName: 'Vestir Mart',
-//     password: '111111',
-//     repeatPassword: '111111',
-//     category: '3',
-//     mobile: '0501431357',
-//     town: 'Asokwa',
-//     city: 'Kumasi',
-//     region: '2'
-//   }
