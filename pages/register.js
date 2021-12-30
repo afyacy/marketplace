@@ -9,6 +9,7 @@ export default function Register () {
   const password = useRef({})
   const router = useRouter()
   password.current = watch('password', '')
+
   const registerUser = async (data) => {
     try {
       await axios.post('api/register', data)
